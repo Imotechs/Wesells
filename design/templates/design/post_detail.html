@@ -1,0 +1,70 @@
+
+{% extends "design/base.html" %}
+
+{% block contents %}
+
+    <h1></h1>
+        <div class="media-body" padding-top="50px">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date|date:'F d, Y' }}</small>
+          
+          </div>
+          <h2 class = 'images-contents'><img  src='{{ post.image.url }}'></h2>
+          <div>{{object.content}}</div>
+
+          <h4>
+            <div class= 'image-footer'>
+              
+              {{ object.title }}</a> | {{object.cost}} &nbsp;
+
+                
+
+             <small class="text-muted">
+               <form action="{% url 'like' post.pk %}" method="POST" >
+              {% csrf_token %}
+                  <button class="btn btn-outline-primary btn-sm" name="post_id"
+                   type = "submit" value="{{post.id}}">Like</button>
+                   {% if object.total_likes%}
+                   {{object.total_likes}}{{ 'likes'}}
+                   {%else%}
+                   {{'0 likes'}}
+
+                   {%endif%}
+          </a></small>&nbsp;
+                 <small> <a href="{% url 'design:details' object.id %}"> Comment</a> 
+              <a href = "{% url 'design:placeorder' post.id %}">&nbsp; Place Order</a></small></h4>
+              <br/>
+            </form>
+        </div>
+              {% if object.author == user %}
+          <div>
+           <p>
+             <a class = "btn btn-outline-infor" href="{%url 'design:update' object.id%}">Update</a>
+            <a href= "{%url 'design:delete' object.id%}">Delete</a></p>
+              
+            </div>
+         
+        </div>
+            
+          </h4></h2>
+
+          {% endif %} 
+          <div class="left-contents"> <h5>Comments ...</h5>
+            {%if not object.coments.all %}
+            0 Comments <a href="#">add one</a>
+
+            {%else%}
+                {% for x in object.coments.all%}
+                <strong>{{x.username}}  </strong>
+                  <small>{{x.date}}</small>
+              
+                <br/>
+                {{x.coment}}
+                <hr/>
+                {%endfor%}
+
+            {%endif%}
+          </div>
+
+{% endblock contents %}

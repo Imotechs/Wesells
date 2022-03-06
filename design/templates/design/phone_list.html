@@ -1,0 +1,24 @@
+{% extends 'design/base.html'%}
+{%load static%}
+{% block contents %} 
+{% if user.is_superuser %}
+              <li class="nav-item active">
+              <a class="nav-item nav-link" href="{% url 'design:create'%}">  Add Design*</a>
+                </li>
+              {%endif%}
+<div class="owl-carousel owl-theme">
+    {% for post in phones %}
+    <a href="{% url 'design:details' post.id %}">
+      <div class="featured-item">
+        <small>{{post.author}}</small>
+        <img src='{{ post.image.url }}' alt="Item" >
+        <h4>{{ post.title }}</h4>
+        <h6>{{post.cost}}</h6>   <small>{{ post.date|date:'F d, Y' }}</small>
+
+      </div>
+    </a>
+    {% endfor %}
+</div>
+    <br/>
+  
+    {%endblock contents %}

@@ -1,0 +1,138 @@
+{% extends 'design/index.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block contents %} 
+{% if user.is_superuser %}
+              <li class="nav-item active">
+              <a class="nav-item nav-link" href="{% url 'design:postphone'%}">  Add Phone*</a>
+                </li>
+              {%endif%}
+<div class="owl-carousel owl-theme">
+  {% for post in phones %}
+  <a href="{% url 'design:details' post.id %}">
+      <div class="featured-item">
+        <small>{{post.author}}</small>
+        <img src='{{ post.image.url }}' alt="Item" >
+        <h4>{{ post.title }}</h4>
+        <h6>{{post.cost}}</h6>   <small>{{ post.date|date:'F d, Y' }}</small>
+        <p><small class="text-muted">Click to see Details</small></p>
+
+      </div>
+    </a>
+    {% endfor %}
+</div>
+    <br>
+
+    <a class="nav-item nav-link" href="{% url 'design:cars'%}"><h3>Drives</h3></a>
+
+    {% if user.is_superuser %}
+              <li class="nav-item active">
+              <a class="nav-item nav-link" href="{% url 'design:postphone'%}">  Add Design*</a>
+                </li>
+              {%endif%}
+    <div class="owl-carousel owl-theme">
+                  
+      {% for post in cars%}
+      <a href="{% url 'design:cars'%}">
+        <div class="featured-item">
+          <small>{{post.author}}</small>
+          <img src='{{ post.image.url }}' alt="Item" >
+          <style>
+            .featured-item{
+              border-color:1px aqua;
+              border-radius: 1px;
+            }
+            h4{
+              color:rgb(10, 95, 95);
+            }
+            p{
+              color:brown;
+            }
+            d{
+              color:aquamarine;
+            }
+            c{
+              color: blueviolet;
+              font-size: 12px;
+            }
+          </style>
+           <h4><d>{{ post.title }}</d></h4>
+           <h4><c>{{post.cost}}</c></h4>   <small>{{ post.date}}</small>
+          <p><small class="text-muted">Click to see Details</small></p>
+        </div>
+      </a>
+    
+      {% endfor %}
+
+    </div>
+<br>
+<a class="nav-item nav-link" href="{% url 'design:handbags'%}"> <h3>HandBag</h3>
+</a>
+{% if user.is_superuser %}
+<li class="nav-item active">
+<a class="nav-item nav-link" href="{% url 'design:posthandbag'%}">  Add Design*</a>
+  </li>
+{%endif%}      
+    <div class="owl-carousel owl-theme">
+      
+            {% for post in handbags %}
+            <a href="{% url 'design:childdetails' post.id %}">
+              <div class="featured-item">
+                <small>{{post.author}}</small>
+                <img src='{{ post.image.url }}' alt="Item">
+                <h4>{{ post.title }}</h4>
+                <small><p >{{post.cost}}</p>{{ post.date|date:'F d, Y' }}</small>
+                <p><small class="text-muted">Click to see Details</small></p>
+              </div>
+            </a>
+            {% endfor %}
+
+    </div>
+
+
+    <h3>Cloths</h3>
+    {% if user.is_superuser %}
+    <li class="nav-item active">
+    <a class="nav-item nav-link" href="{% url 'design:create'%}">  Add Design*</a>
+      </li>
+    {%endif%}      
+        <div class="owl-carousel owl-theme">
+          
+                {% for post in posts %}
+                <a href="{% url 'design:childdetails' post.id %}">
+                  <div class="featured-item">
+                    <small>{{post.author}}</small>
+                    <img src='{{ post.image.url }}' alt="Item">
+                    <h4>{{ post.title }}</h4>
+                    <small><p >{{post.cost}}</p>{{ post.date|date:'F d, Y' }}</small>
+                    <p><small class="text-muted">Click to see Details</small></p>
+                  </div>
+                </a>
+                {% endfor %}
+    
+        </div>
+    
+        <a class="nav-item nav-link" href="{% url 'design:shoes'%}"> <h3>Foot Wears</h3></a>
+        {% if user.is_superuser %}
+        <li class="nav-item active">
+        <a class="nav-item nav-link" href="{% url 'design:postshoe'%}">  Add Design*</a>
+          </li>
+        {%endif%}      
+            <div class="owl-carousel owl-theme">
+              
+                    {% for post in shoes %}
+                    <a href="{% url 'design:childdetails' post.id %}">
+                      <div class="featured-item">
+                        <small>{{post.author}}</small>
+                        <img src='{{ post.image.url }}' alt="Item">
+                        <h4>{{ post.title }}</h4>
+                        <small><p >{{post.cost}}</p>{{ post.date|date:'F d, Y' }}</small>
+                        <p><small class="text-muted">Click to see Details</small></p>
+                      </div>
+                    </a>
+                    {% endfor %}
+        
+            </div>
+        
+{%endblock contents %}
+

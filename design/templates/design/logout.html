@@ -1,0 +1,18 @@
+{% extends "design/base.html"%}
+{% load crispy_forms_tags %}
+{% block contents %}
+<div class='content-section'>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class= "form-group">
+            <legend class = "border-bottom mb-4">LogOut</legend>
+            {{ form|crispy}}
+        </fieldset>
+        <h2><p class="text-muted">You Are Logged Out</p></h2>
+        <div class= "form-group">
+            <a class = "btn btn-outline-secondary" href="{% url 'login'%}" >Login</button>
+        </div>
+    </form>
+</div>
+
+{%endblock contents%}

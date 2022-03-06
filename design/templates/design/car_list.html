@@ -1,0 +1,29 @@
+{% extends 'design/base.html'%}
+{%load static%}
+{% block contents %} 
+{% if user.is_superuser %}
+              <li class="nav-item active">
+              <a class="nav-item nav-link" href="{% url 'design:create'%}">  Add Design*</a>
+                </li>
+              {%endif%}
+             
+              
+<div class="owl-carousel owl-theme">
+    {% for post in cars %}
+    <a href="{% url 'design:details' post.id %}">
+      <div class="featured-item">
+        <small>{{post.author}}</small>
+        <img src='{{ post.image.url }}' alt="Item" >
+        </a>
+        <h4>{{ post.title }}</h4>
+        <h6>NGN{{post.cost}}</h6>   <small>{{ post.date|date:'F d, Y' }}</small>
+        <button data-product = {{post.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">
+          Add to Cart</button>
+      </div>
+    
+    
+    {% endfor %}
+</div>
+    <br/>
+
+    {%endblock contents %}

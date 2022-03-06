@@ -1,0 +1,43 @@
+
+{% extends "design/base.html" %}
+
+{% block contents %}
+<div class="content-section">
+    <h1></h1>
+        <div class="media-body" padding-top="50px">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date|date:'F d, Y' }}</small>
+          
+          </div>
+          <h2 class = 'images-contents'><img  src='{{ object.image.url }}'></h2>
+          <div>{{object.content}}</div>
+
+          <h4>
+            <div class= 'image-footer'>
+              
+              {{ object.title }}</a> | {{object.cost}} &nbsp;
+
+                
+
+             <small class="text-muted">
+               
+          </a></small>&nbsp;
+             
+        </div>
+              {% if object.author == user %}
+          <div>
+           <p>
+             <a class = "btn btn-outline-infor" href="{%url 'design:update' object.id%}">Update</a>
+            <a href= "{%url 'design:delete' object.id%}">Delete</a></p>
+              
+            </div>
+         
+        </div>
+            
+          </h4></h2>
+
+          {% endif %} 
+          
+</div>
+{% endblock contents %}

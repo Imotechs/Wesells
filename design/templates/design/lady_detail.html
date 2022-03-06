@@ -1,0 +1,63 @@
+
+{% extends "design/base.html" %}
+{% block contents %}
+
+    <h1></h1>
+        <div class="media-body" padding-top="50px">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date|date:'F d, Y' }}</small>
+          
+          </div>
+          <h2 class = 'images-contents'><img  src='{{ object.image.url }}'></h2>
+          <div>{{object.content}}</div>
+
+          <h4>
+            <div class= 'image-footer'>
+              
+              {{ object.title }}</a> | {{object.cost}} &nbsp;
+
+                
+
+             <small class="text-muted">
+
+          </a></small>&nbsp;
+                 <small> <a href="{% url 'design:ladydetails' object.id %}"> Comment</a> 
+              <br/>
+            </form>
+        </div>
+              {% if object.author == user %}
+          <div>
+           <p>
+             <a class = "btn btn-outline-infor" href="{%url 'design:update' object.id%}">Update</a>
+            <a href= "{%url 'design:delete' object.id%}">Delete</a></p>
+              
+            </div>
+         
+        </div>
+            
+          </h4></h2>
+
+          {% endif %} 
+          
+          {% if user.is_superuser %}
+              <li class="nav-item active">
+              <a class="nav-item nav-link" href="{% url 'design:lady'%}">  Add Design*</a>
+                </li>
+              {%endif%}
+    <div class="owl-carousel owl-theme">
+                  
+      {% for post in Ladys %}
+      <a href="{% url 'design:ladydetails' post.id %}">
+        <div class="featured-item">
+          <small>{{post.author}}</small>
+          <img src='{{ post.image.url }}' alt="Item" >
+          <h4>{{ post.title }}</h4>
+          <h6>{{post.cost}}</h6>   <small>{{ post.date|date:'F d, Y' }}</small>
+          <p><small class="text-muted">Click to see Details</small></p>
+        </div>
+      </a>
+    
+      {% endfor %}
+
+{% endblock contents %}
